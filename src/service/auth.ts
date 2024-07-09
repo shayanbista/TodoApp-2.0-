@@ -1,21 +1,26 @@
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import { User } from "../interface/user";
 import bcrypt from "bcrypt";
 import config from "../config";
 
 import * as userService from "./user";
 
+interface CustomJwtPayload {
+  email: string;
+  id: string;
+}
+
 export const login = async (body: Pick<User, "email" | "password">) => {
   const existingUser = userService.getUserByEmail(body.email);
   if (!existingUser) {
-    return { error: "Invalid enail or password" };
+    return null;
   }
   const isvalidPassword = await bcrypt.compare(
     body.password,
     existingUser.password
   );
   if (!isvalidPassword) {
-    return { error: "Invalid email or password" };
+    return null;
   }
 
   const payload = {
@@ -38,4 +43,37 @@ export const login = async (body: Pick<User, "email" | "password">) => {
 export const signUp = async (user: User) => {
   const newUser = await userService.createUser(user);
   return newUser;
+};
+
+export const refreshToken = async (token: string) => {
+  try {
+    const decoded = verify(token, config.jwt.secret!) as CustomJwtPayload;
+
+    const existingUser = await userService.getUserByEmail(
+      decoded.email as string
+    );
+
+    console.log("existinguser", existingUser);
+    if (!existingUser) {
+      return { error: "Invalid token" };
+    }
+
+    const payload = {
+      id: decoded.id,
+      name: existingUser.name,
+      email: existingUser.email,
+    };
+
+    const newAccessToken = sign(payload, config.jwt.secret!, {
+      expiresIn: config.jwt.accessExpiration,
+    });
+
+    const newRefreshToken = sign(payload, config.jwt.secret!, {
+      expiresIn: config.jwt.refreshTokenExpiration,
+    });
+
+    return { accessToken: newAccessToken, refreshToken: newRefreshToken };
+  } catch (error) {
+    throw new Error("internal server error");
+  }
 };

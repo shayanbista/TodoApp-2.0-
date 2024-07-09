@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { addTask, getTasks, updateTask, deleteTask } from "../controller/todo";
+import { auth } from "../middlewares/auth";
 
-const todo_router = Router();
-todo_router.post("/", addTask);
-todo_router.get("/", getTasks);
-todo_router.put("/:id", updateTask);
-todo_router.delete("/:id", deleteTask);
+const todoRouter = Router();
+todoRouter.post("/", auth, addTask);
+todoRouter.get("/", auth, getTasks);
+todoRouter.put("/:id", auth, updateTask);
+todoRouter.delete("/:id", auth, deleteTask);
 
-export default todo_router;
+export default todoRouter;
