@@ -5,7 +5,7 @@ import config from "../config";
 
 import * as userService from "./user";
 
-export async function login(body: Pick<User, "email" | "password">) {
+export const login = async (body: Pick<User, "email" | "password">) => {
   const existingUser = userService.getUserByEmail(body.email);
   if (!existingUser) {
     return { error: "Invalid enail or password" };
@@ -25,11 +25,12 @@ export async function login(body: Pick<User, "email" | "password">) {
   };
 
   const s = config.jwt.secret!;
-  const accessToken = await sign(payload, s, {
+  const accessToken = sign(payload, s, {
     expiresIn: config.jwt.accessExpiration,
   });
-  const refreshToken = await sign(payload, s, {
+
+  const refreshToken = sign(payload, s, {
     expiresIn: config.jwt.refreshTokenExpiration,
   });
   return { accessToken, refreshToken };
-}
+};
