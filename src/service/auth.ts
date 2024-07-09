@@ -34,3 +34,8 @@ export const login = async (body: Pick<User, "email" | "password">) => {
   });
   return { accessToken, refreshToken };
 };
+
+export const signUp = async (user: User) => {
+  const newUser = await userService.createUser(user);
+  return newUser;
+};
