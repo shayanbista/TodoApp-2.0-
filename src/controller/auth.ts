@@ -27,6 +27,7 @@ export const refreshToken = async (req: Request, res: Response) => {
   if (authorization) {
     const token = authorization.split(" ");
     const newToken = await authServices.refreshToken(token[1]);
-    res.json(newToken);
+
+    res.status(201).json(newToken);
   }
 };
