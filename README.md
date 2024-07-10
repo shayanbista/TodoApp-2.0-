@@ -1,3 +1,15 @@
+Running it on your own machine:
+
+pull the docker image using: docker pull shayanbista786/todo:2.0
+
+run the image using your own .env file (contents of the env are in .env.example), run command :docker run -p 3000:3000  shayanbista786/todo:2.0
+
+
+use Postman(or your choice of HTTP client) to use the API.
+
+
+
+
 Executing:
 
 use POST '/users' to add a new user.
