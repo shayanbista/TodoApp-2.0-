@@ -15,7 +15,7 @@ To get started, pull the Docker image from Docker Hub:
 
 ```sh
 docker pull shayanbista786/todo:2.0
-
+```
 
 ## API Endpoints Summary
 
