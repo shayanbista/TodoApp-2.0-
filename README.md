@@ -26,4 +26,4 @@ docker pull shayanbista786/todo:2.0
 | GET    | /users   | View all users and tasks (requires authentication) |
 | POST   | /auth/refresh-token | Get new access and refresh tokens |
 
-Remember to always keep your access and refresh tokens secure.
+
