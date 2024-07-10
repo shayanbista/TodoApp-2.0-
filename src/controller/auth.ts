@@ -29,5 +29,7 @@ export const refreshToken = async (req: Request, res: Response) => {
     const newToken = await authServices.refreshToken(token[1]);
 
     res.status(201).json(newToken);
+  } else {
+    res.status(404).json({ message: "header not dound" });
   }
 };

@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
-
 import config from "../config";
 
 export function auth(req: Request, res: Response, next: NextFunction) {
@@ -8,7 +7,7 @@ export function auth(req: Request, res: Response, next: NextFunction) {
 
   if (!authorization) {
     if (!authorization) {
-      return res.status(401).json({ error: "no authentication header" });
+      return res.status(401).json({ error: "No authentication header" });
     }
   }
 

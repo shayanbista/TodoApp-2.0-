@@ -53,13 +53,12 @@ export const refreshToken = async (token: string) => {
       decoded.email as string
     );
 
-    console.log("existinguser", existingUser);
     if (!existingUser) {
       return { error: "Invalid token" };
     }
 
     const payload = {
-      id: decoded.id,
+      id: existingUser.id,
       name: existingUser.name,
       email: existingUser.email,
     };
@@ -73,7 +72,7 @@ export const refreshToken = async (token: string) => {
     });
 
     return { accessToken: newAccessToken, refreshToken: newRefreshToken };
-  } catch (error) {
-    throw new Error("internal server error");
+  } catch (err) {
+    return err;
   }
 };
