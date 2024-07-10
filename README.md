@@ -21,7 +21,7 @@ docker pull shayanbista786/todo:2.0
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST   | /auth.signup   | Add a new user |
+| POST   | /auth/signup   | Add a new user |
 | POST   | /auth/login | Log in and get access token |
 | GET    | /users   | View all users and tasks (requires authentication) |
 | POST   | /auth/refresh-token | Get new access and refresh tokens |
