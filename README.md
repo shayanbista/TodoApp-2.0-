@@ -1,22 +1,17 @@
-Running it on your own machine:
+# Todo App API
 
-pull the docker image using: docker pull shayanbista786/todo:2.0
+This is a Todo App API built with Node.js and Docker. The API allows you to manage users and tasks, including authentication and token refresh functionality.
 
-run the image using your own .env file (contents of the env are in .env.example), run command :docker run -p 3000:3000  shayanbista786/todo:2.0
+## Prerequisites
 
+- Docker installed on your machine.
+- A `.env` file with the necessary environment variables (refer to `.env.example`).
 
-use Postman(or your choice of HTTP client) to use the API.
+## Getting Started
 
+### Pull the Docker Image
 
+To get started, pull the Docker image from Docker Hub:
 
-
-Executing:
-
-use POST '/users' to add a new user.
-
-use POST '/auth/login' to log in and get the access token.
-
-use GET '/users' and use that access token as a bearer to view all the users and the tasks. note: you can run CRUD on tasks from here as well.
-
-use POST '/auth/refresh-token' and pass the refresh token to get a new access token and refresh token.
-
+```sh
+docker pull shayanbista786/todo:2.0
